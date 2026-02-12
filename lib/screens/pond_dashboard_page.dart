@@ -12,7 +12,7 @@ class PondDashboardPage extends StatelessWidget {
           child: Column(
             children: [
 
-              // TOP SECTION
+              // Top Section
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Row(
@@ -52,13 +52,13 @@ class PondDashboardPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // STATUS CARD
+              // Status Card
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
-                padding: const EdgeInsets.all(12), // Card Padding
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.white, // Card Background
-                  borderRadius: BorderRadius.circular(15), // Border Radius
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +79,7 @@ class PondDashboardPage extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                           decoration: BoxDecoration(
-                            color: Colors.green.shade300,
+                            color: Colors.green,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: const Text(
@@ -151,7 +151,6 @@ class PondDashboardPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // EDIT DETAILS
               TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.edit, color: Colors.white),
@@ -167,13 +166,10 @@ class PondDashboardPage extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // BUTTONS
               _buildButton("View Live Feed"),
               const SizedBox(height: 20),
-
               _buildButton("View Water Quality"),
               const SizedBox(height: 20),
-
               _buildButton("View Feed Schedule"),
 
               const SizedBox(height: 40),
