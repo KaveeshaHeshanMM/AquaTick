@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'water_quality_details.dart';
 
 class PondDashboardPage extends StatelessWidget {
   const PondDashboardPage({super.key});
@@ -7,36 +7,21 @@ class PondDashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A73E8),
-
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF1A73E8),
-        elevation: 0,
-        title: const Text(
-          "Dashboard",
-          style: TextStyle(color: Colors.white),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout, color: Colors.white),
-            onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-            },
-          ),
-        ],
-      ),
-
+      backgroundColor: const Color(0xFF1A73E8), // App Background
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
 
-              // Top Section
+              const SizedBox(height: 80),
+
+              // 🔹 TOP SECTION
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
@@ -60,23 +45,24 @@ class PondDashboardPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Icon(
-                      Icons.water_drop_outlined,
-                      size: 40,
-                      color: Colors.white,
-                    )
+
+                    Image.asset(
+                      'assets/kaveesha_logo.jpeg',
+                      height: 40,
+                    ),
+
                   ],
                 ),
               ),
 
               const SizedBox(height: 30),
 
-              // Status Card
+              // 🔹 STATUS CARD
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.all(12), // Card Padding
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFFFFFFFF),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
@@ -92,13 +78,13 @@ class PondDashboardPage extends StatelessWidget {
                             fontFamily: 'Roboto',
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Color(0xFF000000),
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.green,
+                            color: Colors.green.shade300,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: const Text(
@@ -119,6 +105,7 @@ class PondDashboardPage extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 16,
+                        color: Color(0xFF000000),
                       ),
                     ),
                     const Text(
@@ -126,6 +113,7 @@ class PondDashboardPage extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 16,
+                        color: Color(0xFF000000),
                       ),
                     ),
                     const Text(
@@ -133,6 +121,7 @@ class PondDashboardPage extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontSize: 16,
+                        color: Color(0xFF000000),
                       ),
                     ),
 
@@ -151,6 +140,7 @@ class PondDashboardPage extends StatelessWidget {
                                 fontFamily: 'Roboto',
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
+                                color: Color(0xFF000000),
                               ),
                             ),
                             Text(
@@ -158,6 +148,7 @@ class PondDashboardPage extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontSize: 16,
+                                color: Color(0xFF000000),
                               ),
                             ),
                           ],
@@ -170,6 +161,7 @@ class PondDashboardPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
+              // 🔹 EDIT DETAILS
               TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.edit, color: Colors.white),
@@ -185,11 +177,29 @@ class PondDashboardPage extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              _buildButton("View Live Feed"),
+              // 🔹 BUTTONS
+
+              _buildButton(
+                title: "View Live Feed",
+                context: context,
+                navigate: false,
+              ),
+
               const SizedBox(height: 20),
-              _buildButton("View Water Quality"),
+
+              _buildButton(
+                title: "View Water Quality",
+                context: context,
+                navigate: true,
+              ),
+
               const SizedBox(height: 20),
-              _buildButton("View Feed Schedule"),
+
+              _buildButton(
+                title: "View Feed Schedule",
+                context: context,
+                navigate: false,
+              ),
 
               const SizedBox(height: 40),
 
@@ -197,7 +207,7 @@ class PondDashboardPage extends StatelessWidget {
                 Icons.keyboard_arrow_up,
                 size: 40,
                 color: Colors.white,
-              )
+              ),
             ],
           ),
         ),
@@ -205,22 +215,39 @@ class PondDashboardPage extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(String title) {
-    return Container(
-      width: 250,
-      height: 55,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      alignment: Alignment.center,
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontFamily: 'Roboto',
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
+  // 🔹 BUTTON METHOD
+  Widget _buildButton({
+    required String title,
+    required BuildContext context,
+    required bool navigate,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        if (navigate) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const WaterQualityDetails(),
+            ),
+          );
+        }
+      },
+      child: Container(
+        width: 250,
+        height: 55,
+        decoration: BoxDecoration(
+          color: const Color(0xFFFFFFFF),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontFamily: 'Roboto',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF000000),
+          ),
         ),
       ),
     );
