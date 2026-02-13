@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/app_gradient_background.dart';
 
 class WaterQualityDetails extends StatelessWidget {
   const WaterQualityDetails({super.key});
@@ -6,14 +7,13 @@ class WaterQualityDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A73E8), // SAME as dashboard
-      body: SafeArea(
+      body: AppGradientBackground(
         child: Stack(
           children: [
 
-            // 🔹 Purple Background Shape (Lowered to avoid border issue)
+            // 🔹 Decorative Purple Shape
             Positioned(
-              top: 240, // 🔥 lowered properly
+              top: 240,
               left: -70,
               child: Container(
                 width: 260,
@@ -33,12 +33,12 @@ class WaterQualityDetails extends StatelessWidget {
 
                   // 🔹 TOP SECTION
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40), // same margin as dashboard
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
 
-                        // Back Row
+                        // Back Button
                         Row(
                           children: [
                             GestureDetector(
@@ -52,7 +52,6 @@ class WaterQualityDetails extends StatelessWidget {
                             const Text(
                               "Back",
                               style: TextStyle(
-                                fontFamily: 'Roboto',
                                 fontSize: 18,
                                 color: Colors.white,
                               ),
@@ -62,7 +61,6 @@ class WaterQualityDetails extends StatelessWidget {
 
                         const SizedBox(height: 25),
 
-                        // Title + Logo
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -73,7 +71,6 @@ class WaterQualityDetails extends StatelessWidget {
                                 Text(
                                   "Water Quality",
                                   style: TextStyle(
-                                    fontFamily: 'Roboto',
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
@@ -83,7 +80,6 @@ class WaterQualityDetails extends StatelessWidget {
                                 Text(
                                   "Pond A1",
                                   style: TextStyle(
-                                    fontFamily: 'Roboto',
                                     fontSize: 18,
                                     color: Colors.white,
                                   ),
@@ -109,9 +105,21 @@ class WaterQualityDetails extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Row(
                       children: [
-                        Expanded(child: _smallCard("28°C", Colors.red)),
+                        Expanded(
+                          child: _smallCard(
+                            value: "28°C",
+                            icon: Icons.thermostat,
+                            iconColor: Colors.red,
+                          ),
+                        ),
                         const SizedBox(width: 20),
-                        Expanded(child: _smallCard("7.5", Colors.blue)),
+                        Expanded(
+                          child: _smallCard(
+                            value: "7.5",
+                            icon: Icons.science,
+                            iconColor: Colors.blue,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -134,7 +142,6 @@ class WaterQualityDetails extends StatelessWidget {
                       child: Text(
                         "Sensor Status",
                         style: TextStyle(
-                          fontFamily: 'Roboto',
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -146,11 +153,10 @@ class WaterQualityDetails extends StatelessWidget {
                   const SizedBox(height: 15),
 
                   const Padding(
-                    padding: EdgeInsets.only(left: 55), // slight indent
+                    padding: EdgeInsets.only(left: 55),
                     child: Text(
                       "Temperature\npH\nDissolved Oxygen",
                       style: TextStyle(
-                        fontFamily: 'Roboto',
                         fontSize: 18,
                         color: Colors.white,
                         height: 1.8,
@@ -160,33 +166,39 @@ class WaterQualityDetails extends StatelessWidget {
 
                   const SizedBox(height: 30),
 
-                  // 🔹 Recent Readings
+                  // 🔹 Recent Readings Card
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(18),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.15),
+                            blurRadius: 10,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children: const [
 
-                          const Text(
+                          Text(
                             "Recent Readings",
                             style: TextStyle(
-                              fontFamily: 'Roboto',
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
 
-                          const SizedBox(height: 15),
+                          SizedBox(height: 15),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Expanded(
                                 child: Text(
                                   "Temp 28°C | pH 7.5\nDO: 6.6 mg/L",
@@ -197,11 +209,11 @@ class WaterQualityDetails extends StatelessWidget {
                             ],
                           ),
 
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Expanded(
                                 child: Text(
                                   "Temp 25°C | pH 7.5\nDO: 7.1 mg/L",
@@ -234,16 +246,27 @@ class WaterQualityDetails extends StatelessWidget {
     );
   }
 
-  Widget _smallCard(String value, Color iconColor) {
+  Widget _smallCard({
+    required String value,
+    required IconData icon,
+    required Color iconColor,
+  }) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         children: [
-          Icon(Icons.thermostat, size: 30, color: iconColor),
+          Icon(icon, size: 30, color: iconColor),
           const SizedBox(height: 10),
           Text(
             value,
@@ -254,7 +277,8 @@ class WaterQualityDetails extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            padding:
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             decoration: BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.circular(20),
@@ -268,10 +292,17 @@ class WaterQualityDetails extends StatelessWidget {
 
   Widget _oxygenCard() {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         children: [
@@ -288,14 +319,18 @@ class WaterQualityDetails extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 15),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-            decoration: BoxDecoration(
-              color: Color(0xFFF4C542),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+          SizedBox(height: 15),
+          Center(
+            child: Container(
+              padding:
+              EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+              decoration: BoxDecoration(
+                color: Color(0xFFF4C542),
+                borderRadius:
+                BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Text("NORMAL"),
             ),
-            child: const Text("NORMAL"),
           ),
         ],
       ),

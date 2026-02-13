@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'water_quality_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'water_quality_details.dart';
+import '../widgets/app_gradient_background.dart';
 
 class PondDashboardPage extends StatelessWidget {
   const PondDashboardPage({super.key});
@@ -8,8 +9,7 @@ class PondDashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      body: SafeArea(
+      body: AppGradientBackground(
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -29,7 +29,6 @@ class PondDashboardPage extends StatelessWidget {
                         Text(
                           "Pond A1",
                           style: TextStyle(
-                            fontFamily: 'Roboto',
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -39,7 +38,6 @@ class PondDashboardPage extends StatelessWidget {
                         Text(
                           "East-Side Stock",
                           style: TextStyle(
-                            fontFamily: 'Roboto',
                             fontSize: 16,
                             color: Colors.white,
                           ),
@@ -63,29 +61,32 @@ class PondDashboardPage extends StatelessWidget {
                             Icons.logout,
                             color: Colors.white,
                           ),
-                            onPressed: () async {
-                              final confirm = await showDialog(
-                                context: context,
-                                builder: (_) => AlertDialog(
-                                  title: const Text("Confirm Logout"),
-                                  content: const Text("Are you sure you want to log out?"),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context, false),
-                                      child: const Text("Cancel"),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context, true),
-                                      child: const Text("Logout"),
-                                    ),
-                                  ],
-                                ),
-                              );
+                          onPressed: () async {
+                            final confirm = await showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                title: const Text("Confirm Logout"),
+                                content: const Text(
+                                    "Are you sure you want to log out?"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, false),
+                                    child: const Text("Cancel"),
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, true),
+                                    child: const Text("Logout"),
+                                  ),
+                                ],
+                              ),
+                            );
 
-                              if (confirm == true) {
-                                await FirebaseAuth.instance.signOut();
-                              }
+                            if (confirm == true) {
+                              await FirebaseAuth.instance.signOut();
                             }
+                          },
                         ),
                       ],
                     ),
@@ -98,10 +99,17 @@ class PondDashboardPage extends StatelessWidget {
               // 🔹 STATUS CARD
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 40),
-                padding: const EdgeInsets.all(12), // Card Padding
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFFFFF),
-                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(18),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.15),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,22 +121,20 @@ class PondDashboardPage extends StatelessWidget {
                         const Text(
                           "Status",
                           style: TextStyle(
-                            fontFamily: 'Roboto',
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF000000),
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 6),
                           decoration: BoxDecoration(
-                            color: Colors.green.shade300,
+                            color: Colors.green.shade400,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: const Text(
                             "ACTIVE",
                             style: TextStyle(
-                              fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -138,30 +144,9 @@ class PondDashboardPage extends StatelessWidget {
 
                     const SizedBox(height: 15),
 
-                    const Text(
-                      "Fed At : 12:36 pm",
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 16,
-                        color: Color(0xFF000000),
-                      ),
-                    ),
-                    const Text(
-                      "Stocked 12 Aug 2024",
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 16,
-                        color: Color(0xFF000000),
-                      ),
-                    ),
-                    const Text(
-                      "Feed Type : Pellets",
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 16,
-                        color: Color(0xFF000000),
-                      ),
-                    ),
+                    const Text("Fed At : 12:36 pm"),
+                    const Text("Stocked 12 Aug 2024"),
+                    const Text("Feed Type : Pellets"),
 
                     const SizedBox(height: 15),
 
@@ -175,20 +160,11 @@ class PondDashboardPage extends StatelessWidget {
                             Text(
                               "Tilapia",
                               style: TextStyle(
-                                fontFamily: 'Roboto',
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF000000),
                               ),
                             ),
-                            Text(
-                              "1500 Fish",
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16,
-                                color: Color(0xFF000000),
-                              ),
-                            ),
+                            Text("1500 Fish"),
                           ],
                         )
                       ],
@@ -199,14 +175,12 @@ class PondDashboardPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // 🔹 EDIT DETAILS
               TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.edit, color: Colors.white),
                 label: const Text(
                   "Edit Details",
                   style: TextStyle(
-                    fontFamily: 'Roboto',
                     fontSize: 16,
                     color: Colors.white,
                   ),
@@ -214,8 +188,6 @@ class PondDashboardPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 20),
-
-              // 🔹 BUTTONS
 
               _buildButton(
                 title: "View Live Feed",
@@ -253,7 +225,6 @@ class PondDashboardPage extends StatelessWidget {
     );
   }
 
-  // 🔹 BUTTON METHOD
   Widget _buildButton({
     required String title,
     required BuildContext context,
@@ -274,17 +245,22 @@ class PondDashboardPage extends StatelessWidget {
         width: 250,
         height: 55,
         decoration: BoxDecoration(
-          color: const Color(0xFFFFFFFF),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(25),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         alignment: Alignment.center,
         child: Text(
           title,
           style: const TextStyle(
-            fontFamily: 'Roboto',
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF000000),
           ),
         ),
       ),
