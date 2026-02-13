@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PondDashboardPage extends StatelessWidget {
-  const PondDashboardPage({Key? key}) : super(key: key);
+  const PondDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
