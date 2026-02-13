@@ -92,7 +92,8 @@ class WaterQualityDetails extends StatelessWidget {
                             ),
 
                             Image.asset(
-                              'assets/kaveesha_logo.jpeg',
+                              'assets/aquatick_logo2.png',
+                              color: Colors.white,
                               height: 50,
                             ),
                           ],

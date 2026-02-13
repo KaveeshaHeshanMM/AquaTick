@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'water_quality_details.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PondDashboardPage extends StatelessWidget {
   const PondDashboardPage({super.key});
@@ -7,7 +8,7 @@ class PondDashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A73E8), // App Background
+      
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -46,11 +47,48 @@ class PondDashboardPage extends StatelessWidget {
                       ],
                     ),
 
-                    Image.asset(
-                      'assets/kaveesha_logo.jpeg',
-                      height: 40,
-                    ),
+                    Row(
+                      children: [
 
+                        Image.asset(
+                          'assets/aquatick_logo2.png',
+                          color: Colors.white,
+                          height: 40,
+                        ),
+
+                        const SizedBox(width: 15),
+
+                        IconButton(
+                          icon: const Icon(
+                            Icons.logout,
+                            color: Colors.white,
+                          ),
+                            onPressed: () async {
+                              final confirm = await showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: const Text("Confirm Logout"),
+                                  content: const Text("Are you sure you want to log out?"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, false),
+                                      child: const Text("Cancel"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, true),
+                                      child: const Text("Logout"),
+                                    ),
+                                  ],
+                                ),
+                              );
+
+                              if (confirm == true) {
+                                await FirebaseAuth.instance.signOut();
+                              }
+                            }
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
