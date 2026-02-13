@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PondDashboardPage extends StatelessWidget {
   const PondDashboardPage({super.key});
@@ -6,7 +7,25 @@ class PondDashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A73E8), // App Background
+      backgroundColor: const Color(0xFF1A73E8),
+
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF1A73E8),
+        elevation: 0,
+        title: const Text(
+          "Dashboard",
+          style: TextStyle(color: Colors.white),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.white),
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+            },
+          ),
+        ],
+      ),
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
