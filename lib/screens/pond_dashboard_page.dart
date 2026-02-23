@@ -20,10 +20,14 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
   double temperature = 0.0;
   double pH = 0.0;
-  String waterLevel = "Unknown";
+  String waterLevel = "Unknown";  //Variables storing latest sensor values from the database
 
   @override
   void initState() {
+
+    //method is called automatically when screen initializes
+    //starts listening to latest sensor data from Firebase
+
     super.initState();
     _listenToLatestReading();
   }
