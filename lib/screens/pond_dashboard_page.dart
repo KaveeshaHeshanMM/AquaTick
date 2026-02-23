@@ -177,7 +177,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
             ),
           ),
 
-          ///
+          ///main content area for pond status, water quality and other quick actions
           Expanded(
             child: Container(
               width: double.infinity,
@@ -195,7 +195,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
                   CrossAxisAlignment.start,
                   children: [
 
-                    /// 🔹 STATUS CARD
+                    /// reusable card UI style to follow consistent design
                     _buildCard(
                       child: Column(
                         children: [
@@ -246,7 +246,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
                     const SizedBox(height: 30),
 
-                    /// 🔹 WATER QUALITY
+                    /// mini stat cards showing the real-time water quality parameters
                     const Text(
                       "Water Quality",
                       style: TextStyle(
