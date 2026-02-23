@@ -345,7 +345,8 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
                     const SizedBox(height: 35),
 
-                    /// 🔹 QUICK ACTIONS
+                    /// quick action buttons for navigation to other features
+                    
                     const Text(
                       "Quick Actions",
                       style: TextStyle(
