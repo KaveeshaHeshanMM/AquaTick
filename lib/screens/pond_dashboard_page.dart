@@ -281,6 +281,9 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
+
+                        ///water level colour logic - dynamic colour change based on water level
+
                         color: waterLevel.toLowerCase() == "low"
                             ? Colors.red.withOpacity(0.05)
                             : (waterLevel.toLowerCase() == "normal"
