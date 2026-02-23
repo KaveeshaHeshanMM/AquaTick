@@ -70,7 +70,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
     return Scaffold(
       backgroundColor: Colors.blue.shade700,
-      bottomNavigationBar: BottomAppBar( ///Bottom navigation bar for Home, alerts, settings and Logout
+      bottomNavigationBar: BottomAppBar( ///bottom navigation bar for Home, alerts, settings and Logout
         elevation: 8,
         child: SizedBox(
           height: 65,
@@ -93,7 +93,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
                 // TODO: Navigate to Settings
               }),
 
-              ///Logout signs user out from the Firebase Authentication
+              ///logout signs user out from the Firebase Authentication
 
               _navItem(context, Icons.logout, "Logout", () async {
                 await FirebaseAuth.instance.signOut();
@@ -112,7 +112,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
       body: Column(
         children: [
 
-          /// 🔵 BLUE HEADER SECTION
+          /// blue gradient header for pond information and status
           Container(
             padding: const EdgeInsets.only(
                 top: 60, left: 24, right: 24, bottom: 30),
@@ -177,7 +177,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
             ),
           ),
 
-          /// ⚪ WHITE CONTENT AREA
+          ///
           Expanded(
             child: Container(
               width: double.infinity,
