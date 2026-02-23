@@ -16,7 +16,7 @@ class PondDashboardPage extends StatefulWidget {
 
 class _PondDashboardPageState extends State<PondDashboardPage> {
   final DatabaseReference _dbRef =
-      FirebaseDatabase.instance.ref("sensorReadings/pond1");
+      FirebaseDatabase.instance.ref("sensorReadings/pond1"); //Reference to Firebase realtime database path for pond 1 sensor readings
 
   double temperature = 0.0;
   double pH = 0.0;
