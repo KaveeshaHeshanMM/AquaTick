@@ -92,6 +92,9 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
               _navItem(context, Icons.settings, "Settings", () {
                 // TODO: Navigate to Settings
               }),
+
+              //Logout signs user out from the Firebase Authentication
+
               _navItem(context, Icons.logout, "Logout", () async {
                 await FirebaseAuth.instance.signOut();
                 Navigator.pushAndRemoveUntil(
