@@ -12,15 +12,15 @@ class PondDashboardPage extends StatefulWidget {
   State<PondDashboardPage> createState() => _PondDashboardPageState();
 }
 
-//This screen is created as a stateful widget as sensor data updates in real time
+//this screen is created as a stateful widget as sensor data updates in real time
 
 class _PondDashboardPageState extends State<PondDashboardPage> {
   final DatabaseReference _dbRef =
-      FirebaseDatabase.instance.ref("sensorReadings/pond1"); //Reference to Firebase realtime database path for pond 1 sensor readings
+      FirebaseDatabase.instance.ref("sensorReadings/pond1"); //reference to Firebase realtime database path for pond 1 sensor readings
 
   double temperature = 0.0;
   double pH = 0.0;
-  String waterLevel = "Unknown";  //Variables storing latest sensor values from the database
+  String waterLevel = "Unknown";  //variables storing latest sensor values from the database
 
   @override
   void initState() {
@@ -44,13 +44,16 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
         .listen((event) {
       if (event.snapshot.value != null) {
 
-        
+        //converts firebase readings into a usable Map format and extracts the latest reading
+
         final rawData = event.snapshot.value as Map;
         final data = rawData.map(
           (key, value) => MapEntry(key.toString(), Map<String, dynamic>.from(value)),
         );
         final latest = data.values.first;
 
+        //updates the local variables and refreshes the UI with the latest sensor values
+        
         setState(() {
           temperature = (latest["temperature"] ?? 0).toDouble();
           pH = (latest["pH"] ?? 0).toDouble();
