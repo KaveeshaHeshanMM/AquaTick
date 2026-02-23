@@ -53,7 +53,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
         final latest = data.values.first;
 
         //updates the local variables and refreshes the UI with the latest sensor values
-        
+
         setState(() {
           temperature = (latest["temperature"] ?? 0).toDouble();
           pH = (latest["pH"] ?? 0).toDouble();
@@ -65,9 +65,12 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    //builds the full page layout
+
     return Scaffold(
       backgroundColor: Colors.blue.shade700,
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: BottomAppBar( //Bottom navigation bar for Home, alerts, settings and Logout
         elevation: 8,
         child: SizedBox(
           height: 65,
