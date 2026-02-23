@@ -33,12 +33,18 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
   }
 
   void _listenToLatestReading() {
+
+    //method to listen to latest firebase readings in real-time
+    //orders readings by epoch timestamp
+
     _dbRef
         .orderByChild("epoch")
         .limitToLast(1)
         .onValue
         .listen((event) {
       if (event.snapshot.value != null) {
+
+        
         final rawData = event.snapshot.value as Map;
         final data = rawData.map(
           (key, value) => MapEntry(key.toString(), Map<String, dynamic>.from(value)),
