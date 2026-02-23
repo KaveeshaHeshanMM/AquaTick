@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+<<<<<<< HEAD
+import 'package:mobile_app/screens/Dashboard.dart';
+=======
+>>>>>>> f5bfe49 (flutter codes)
 import 'water_quality_details.dart';
 import 'start_screen.dart';
 
@@ -11,6 +15,24 @@ class PondDashboardPage extends StatefulWidget {
   State<PondDashboardPage> createState() => _PondDashboardPageState();
 }
 
+<<<<<<< HEAD
+///this screen is created as a stateful widget as sensor data updates in real time
+
+class _PondDashboardPageState extends State<PondDashboardPage> {
+  final DatabaseReference _dbRef =
+      FirebaseDatabase.instance.ref("sensorReadings/pond1"); ///reference to Firebase realtime database path for pond 1 sensor readings
+
+  double temperature = 0.0;
+  double pH = 0.0;
+  String waterLevel = "Unknown";  ///variables storing latest sensor values from the database
+
+  @override
+  void initState() {
+
+    ///method is called automatically when screen initializes
+    ///starts listening to latest sensor data from Firebase
+
+=======
 class _PondDashboardPageState extends State<PondDashboardPage> {
   final DatabaseReference _dbRef =
       FirebaseDatabase.instance.ref("sensorReadings/pond1");
@@ -21,23 +43,42 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
   @override
   void initState() {
+>>>>>>> f5bfe49 (flutter codes)
     super.initState();
     _listenToLatestReading();
   }
 
   void _listenToLatestReading() {
+<<<<<<< HEAD
+
+    ///method to listen to latest firebase readings in real-time
+    ///orders readings by epoch timestamp
+
+=======
+>>>>>>> f5bfe49 (flutter codes)
     _dbRef
         .orderByChild("epoch")
         .limitToLast(1)
         .onValue
         .listen((event) {
       if (event.snapshot.value != null) {
+<<<<<<< HEAD
+
+        ///converts firebase readings into a usable Map format and extracts the latest reading
+
+=======
+>>>>>>> f5bfe49 (flutter codes)
         final rawData = event.snapshot.value as Map;
         final data = rawData.map(
           (key, value) => MapEntry(key.toString(), Map<String, dynamic>.from(value)),
         );
         final latest = data.values.first;
 
+<<<<<<< HEAD
+        ///updates the local variables and refreshes the UI with the latest sensor values
+
+=======
+>>>>>>> f5bfe49 (flutter codes)
         setState(() {
           temperature = (latest["temperature"] ?? 0).toDouble();
           pH = (latest["pH"] ?? 0).toDouble();
@@ -49,9 +90,16 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    ///builds the full page layout
+
     return Scaffold(
       backgroundColor: Colors.blue.shade700,
+<<<<<<< HEAD
+      bottomNavigationBar: BottomAppBar( ///bottom navigation bar for Home, alerts, settings and Logout
+=======
       bottomNavigationBar: BottomAppBar(
+>>>>>>> f5bfe49 (flutter codes)
         elevation: 8,
         child: SizedBox(
           height: 65,
@@ -59,7 +107,17 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _navItem(context, Icons.home, "Home", () {
+<<<<<<< HEAD
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DashboardScreen(),
+                  ),
+                      (route) => false,
+                );
+=======
                 Navigator.pop(context);
+>>>>>>> f5bfe49 (flutter codes)
               }),
               _navItem(context, Icons.notifications, "Alerts", () {
                 // TODO: Navigate to Notifications
@@ -67,6 +125,47 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
               _navItem(context, Icons.settings, "Settings", () {
                 // TODO: Navigate to Settings
               }),
+<<<<<<< HEAD
+
+              ///logout signs user out from the Firebase Authentication
+
+              _navItem(context, Icons.logout, "Logout", () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const StartScreen(),
+                  ),
+                  (route) => false,
+                );
+              }),
+            ],
+          ),
+        ),
+      ),
+      body: Column(
+        children: [
+
+          /// blue gradient header for pond information and status
+          Container(
+            padding: const EdgeInsets.only(
+                top: 60, left: 24, right: 24, bottom: 30),
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF1565C0),
+                  Color(0xFF1E88E5),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+=======
               _navItem(context, Icons.logout, "Logout", () async {
                 await FirebaseAuth.instance.signOut();
                 Navigator.pushAndRemoveUntil(
@@ -103,6 +202,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
+>>>>>>> f5bfe49 (flutter codes)
                 Row(
                   mainAxisAlignment:
                   MainAxisAlignment.spaceBetween,
@@ -149,7 +249,11 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
             ),
           ),
 
+<<<<<<< HEAD
+          ///main content area for pond status, water quality and other quick actions
+=======
           /// ⚪ WHITE CONTENT AREA
+>>>>>>> f5bfe49 (flutter codes)
           Expanded(
             child: Container(
               width: double.infinity,
@@ -167,7 +271,11 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
                   CrossAxisAlignment.start,
                   children: [
 
+<<<<<<< HEAD
+                    /// reusable card UI style to follow consistent design
+=======
                     /// 🔹 STATUS CARD
+>>>>>>> f5bfe49 (flutter codes)
                     _buildCard(
                       child: Column(
                         children: [
@@ -218,7 +326,11 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
                     const SizedBox(height: 30),
 
+<<<<<<< HEAD
+                    /// mini stat cards showing the real-time water quality parameters
+=======
                     /// 🔹 WATER QUALITY
+>>>>>>> f5bfe49 (flutter codes)
                     const Text(
                       "Water Quality",
                       style: TextStyle(
@@ -253,6 +365,12 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
+<<<<<<< HEAD
+
+                        ///water level colour logic - dynamic colour change based on water level
+
+=======
+>>>>>>> f5bfe49 (flutter codes)
                         color: waterLevel.toLowerCase() == "low"
                             ? Colors.red.withOpacity(0.05)
                             : (waterLevel.toLowerCase() == "normal"
@@ -314,7 +432,12 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
                     const SizedBox(height: 35),
 
+<<<<<<< HEAD
+                    /// quick action buttons for navigation to other features
+
+=======
                     /// 🔹 QUICK ACTIONS
+>>>>>>> f5bfe49 (flutter codes)
                     const Text(
                       "Quick Actions",
                       style: TextStyle(
@@ -493,6 +616,13 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 }
 
 class _MiniStatCard extends StatelessWidget {
+<<<<<<< HEAD
+
+  ///reusable widget for displaying a single water quality parameter
+  ///used inside the water quality section to display Temperature, pH, and oxygen values dynamically
+  
+=======
+>>>>>>> f5bfe49 (flutter codes)
   final String title;
   final String value;
   final IconData icon;
