@@ -12,21 +12,21 @@ class PondDashboardPage extends StatefulWidget {
   State<PondDashboardPage> createState() => _PondDashboardPageState();
 }
 
-//this screen is created as a stateful widget as sensor data updates in real time
+///this screen is created as a stateful widget as sensor data updates in real time
 
 class _PondDashboardPageState extends State<PondDashboardPage> {
   final DatabaseReference _dbRef =
-      FirebaseDatabase.instance.ref("sensorReadings/pond1"); //reference to Firebase realtime database path for pond 1 sensor readings
+      FirebaseDatabase.instance.ref("sensorReadings/pond1"); ///reference to Firebase realtime database path for pond 1 sensor readings
 
   double temperature = 0.0;
   double pH = 0.0;
-  String waterLevel = "Unknown";  //variables storing latest sensor values from the database
+  String waterLevel = "Unknown";  ///variables storing latest sensor values from the database
 
   @override
   void initState() {
 
-    //method is called automatically when screen initializes
-    //starts listening to latest sensor data from Firebase
+    ///method is called automatically when screen initializes
+    ///starts listening to latest sensor data from Firebase
 
     super.initState();
     _listenToLatestReading();
@@ -34,8 +34,8 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
 
   void _listenToLatestReading() {
 
-    //method to listen to latest firebase readings in real-time
-    //orders readings by epoch timestamp
+    ///method to listen to latest firebase readings in real-time
+    ///orders readings by epoch timestamp
 
     _dbRef
         .orderByChild("epoch")
@@ -44,7 +44,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
         .listen((event) {
       if (event.snapshot.value != null) {
 
-        //converts firebase readings into a usable Map format and extracts the latest reading
+        ///converts firebase readings into a usable Map format and extracts the latest reading
 
         final rawData = event.snapshot.value as Map;
         final data = rawData.map(
@@ -52,7 +52,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
         );
         final latest = data.values.first;
 
-        //updates the local variables and refreshes the UI with the latest sensor values
+        ///updates the local variables and refreshes the UI with the latest sensor values
 
         setState(() {
           temperature = (latest["temperature"] ?? 0).toDouble();
@@ -66,11 +66,11 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
   @override
   Widget build(BuildContext context) {
 
-    //builds the full page layout
+    ///builds the full page layout
 
     return Scaffold(
       backgroundColor: Colors.blue.shade700,
-      bottomNavigationBar: BottomAppBar( //Bottom navigation bar for Home, alerts, settings and Logout
+      bottomNavigationBar: BottomAppBar( ///Bottom navigation bar for Home, alerts, settings and Logout
         elevation: 8,
         child: SizedBox(
           height: 65,
@@ -93,7 +93,7 @@ class _PondDashboardPageState extends State<PondDashboardPage> {
                 // TODO: Navigate to Settings
               }),
 
-              //Logout signs user out from the Firebase Authentication
+              ///Logout signs user out from the Firebase Authentication
 
               _navItem(context, Icons.logout, "Logout", () async {
                 await FirebaseAuth.instance.signOut();
