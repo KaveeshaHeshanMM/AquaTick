@@ -528,7 +528,7 @@ class _MiniStatCard extends StatelessWidget {
 
   ///reusable widget for displaying a single water quality parameter
   ///used inside the water quality section to display Temperature, pH, and oxygen values dynamically
-  
+
   final String title;
   final String value;
   final IconData icon;
