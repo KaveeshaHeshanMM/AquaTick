@@ -27,13 +27,17 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
 
     // called when screen is loaded
     // initiates loading of historical sensor readings
-    
+
     super.initState();
     _loadHistory();
   }
 
   void _loadHistory() {
     _dbRef
+
+        // retrieves last 5 sensor readings ordered by timestamp
+        // listens to real time updates from firebase
+    
         .orderByChild("epoch")
         .limitToLast(5)
         .onValue
