@@ -37,12 +37,15 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
 
         // retrieves last 5 sensor readings ordered by timestamp
         // listens to real time updates from firebase
-    
+
         .orderByChild("epoch")
         .limitToLast(5)
         .onValue
         .listen((event) {
       if (event.snapshot.value != null) {
+
+        // converts Firebase snapshot into a usable Map structure
+
         final raw = event.snapshot.value as Map;
         final data = raw.map((key, value) =>
             MapEntry(key.toString(), Map<String, dynamic>.from(value)));
