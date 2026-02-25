@@ -226,7 +226,7 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
                   child: LineChart(
 
                     // this configures the axis ranges, axis titles, grid lines, border and line style
-                    
+
                     LineChartData(
                       minX: 0,
                       maxX: 4,
@@ -246,6 +246,9 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
                                 return const SizedBox();
                               }
                               return Text(
+
+                                // labels X-axis as R1 to R5 representing last 5 readings
+
                                 'R${value.toInt() + 1}',
                                 style: const TextStyle(fontSize: 10),
                               );
