@@ -66,14 +66,14 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
           phList.add(FlSpot(epoch, p));
         }
 
-        tempList.sort((a, b) => a.x.compareTo(b.x));  // sorts readings chronologically based on timestamp
-        phList.sort((a, b) => a.x.compareTo(b.x));
+        tempList.sort((a, b) => a.x.compareTo(b.x));  // sorts temp readings chronologically based on timestamp
+        phList.sort((a, b) => a.x.compareTo(b.x));    // sorts pH readings chronologically based on timestamp
 
         List<FlSpot> normalizedTemp = [];
         List<FlSpot> normalizedPH = [];
 
         for (int i = 0; i < tempList.length; i++) {
-          normalizedTemp.add(FlSpot(i.toDouble(), tempList[i].y));
+          normalizedTemp.add(FlSpot(i.toDouble(), tempList[i].y)); // normalizes X-axis values to 0-4 for cleaner graph display
         }
 
         for (int i = 0; i < phList.length; i++) {
@@ -81,6 +81,9 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
         }
 
         setState(() {
+
+          // updates UI with latest graph data and current parameter values
+
           tempSpots = normalizedTemp;
           phSpots = normalizedPH;
 
