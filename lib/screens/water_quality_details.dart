@@ -16,10 +16,10 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
       FirebaseDatabase.instance.ref("sensorReadings/pond1"); // connects to firebase and reads data from sensorReadings/pond1
                                                               // hardcoded to pond1 for MVP
 
-  double currentTemp = 0;
-  double currentPH = 0;
+  double currentTemp = 0;   // stores latest temperature value
+  double currentPH = 0;     // stores latest pH value
 
-  List<FlSpot> tempSpots = [];
+  List<FlSpot> tempSpots = []; // store graph data points for last 5 readings
   List<FlSpot> phSpots = [];
 
   @override
