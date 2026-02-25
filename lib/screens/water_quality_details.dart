@@ -107,7 +107,7 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
           Container(
 
             // header section with blue gradient
-            
+
             width: double.infinity,
             padding: const EdgeInsets.only(
                 top: 60, left: 24, right: 24, bottom: 40),
@@ -178,6 +178,9 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
   }
 
   Widget _parameterCard({
+
+    // reusable widget for title, current value and the line graph
+    
     required String title,
     required String value,
     required List<FlSpot> spots,
