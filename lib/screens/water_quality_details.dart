@@ -24,6 +24,10 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
 
   @override
   void initState() {
+
+    // called when screen is loaded
+    // initiates loading of historical sensor readings
+    
     super.initState();
     _loadHistory();
   }
