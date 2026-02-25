@@ -54,6 +54,10 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
         List<FlSpot> phList = [];
 
         for (var reading in data.values) {
+
+          // iterates through each reading and extracts temperature and pH values
+          // converts them into FlSpot points for graph plotting
+
           final t = (reading["temperature"] ?? 0).toDouble();
           final p = (reading["pH"] ?? 0).toDouble();
           final epoch = (reading["epoch"] ?? 0).toDouble();
