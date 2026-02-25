@@ -66,7 +66,7 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
           phList.add(FlSpot(epoch, p));
         }
 
-        tempList.sort((a, b) => a.x.compareTo(b.x));
+        tempList.sort((a, b) => a.x.compareTo(b.x));  // sorts readings chronologically based on timestamp
         phList.sort((a, b) => a.x.compareTo(b.x));
 
         List<FlSpot> normalizedTemp = [];
