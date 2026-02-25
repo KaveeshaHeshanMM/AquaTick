@@ -105,6 +105,9 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
       body: Column(
         children: [
           Container(
+
+            // header section with blue gradient
+            
             width: double.infinity,
             padding: const EdgeInsets.only(
                 top: 60, left: 24, right: 24, bottom: 40),
