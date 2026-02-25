@@ -180,7 +180,7 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
   Widget _parameterCard({
 
     // reusable widget for title, current value and the line graph
-    
+
     required String title,
     required String value,
     required List<FlSpot> spots,
@@ -224,6 +224,9 @@ class _WaterQualityDetailsState extends State<WaterQualityDetails> {
               : SizedBox(
                   height: 180,
                   child: LineChart(
+
+                    // this configures the axis ranges, axis titles, grid lines, border and line style
+                    
                     LineChartData(
                       minX: 0,
                       maxX: 4,
