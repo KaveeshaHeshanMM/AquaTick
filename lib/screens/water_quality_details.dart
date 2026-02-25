@@ -3,7 +3,7 @@ import '../widgets/app_gradient_background.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class WaterQualityDetails extends StatefulWidget {
+class WaterQualityDetails extends StatefulWidget { // created as a stateful widget because readings update in real-time
   const WaterQualityDetails({super.key});
 
   @override
@@ -13,7 +13,8 @@ class WaterQualityDetails extends StatefulWidget {
 class _WaterQualityDetailsState extends State<WaterQualityDetails> {
 
   final DatabaseReference _dbRef =
-      FirebaseDatabase.instance.ref("sensorReadings/pond1");
+      FirebaseDatabase.instance.ref("sensorReadings/pond1"); // connects to firebase and reads data from sensorReadings/pond1
+                                                              // hardcoded to pond1 for MVP
 
   double currentTemp = 0;
   double currentPH = 0;
